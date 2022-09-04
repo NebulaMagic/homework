@@ -25,8 +25,8 @@ static void matrix_randomize(Matrix &out) {
 
     // 这个循环为什么不够高效？如何优化？ 10 分
 #pragma omp parallel for collapse(2)
-    for (int x = 0; x < nx; x++) {
-        for (int y = 0; y < ny; y++) {
+    for (int y = 0; y < ny; y++) {
+        for (int x = 0; x < nx; x++) {
             float val = wangsrng(x, y).next_float();
             out(x, y) = val;
         }
@@ -78,7 +78,7 @@ static void matrix_multiply(Matrix &out, Matrix const &lhs, Matrix const &rhs) {
 static void matrix_RtAR(Matrix &RtAR, Matrix const &R, Matrix const &A) {
     TICK(matrix_RtAR);
     // 这两个是临时变量，有什么可以优化的？ 5 分
-    Matrix Rt, RtA;
+    Matrix Rt, RtA; //测试在原版和是否加static下没有什么明显变化且时间不稳定，未知
     matrix_transpose(Rt, R);
     matrix_multiply(RtA, Rt, A);
     matrix_multiply(RtAR, RtA, R);

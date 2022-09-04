@@ -1,24 +1,36 @@
+# 未完成
+
+
+# lscpu
+
+    Thread(s) per core:              1
+    Core(s) per socket:              2
+    L1d cache:                       64 KiB
+    L1i cache:                       64 KiB
+    L2 cache:                        8 MiB
+    L3 cache:                        35.8 MiB
+
 # 改进前
 
 ```
-这里贴改进前的运行结果。
-matrix_randomize: 100s
+matrix_randomize: 0.00703398s
+matrix_randomize: 0.0102356s
+
 ```
 
 # 改进后
 
 ```
-这里贴改进后的运行结果。
-matrix_randomize: 0.01s
+matrix_randomize: 0.00388176s
+matrix_randomize: 0.00386299s
+
 ```
 
 # 加速比
 
-matrix_randomize: 10000x
-matrix_transpose: 10000x
-matrix_multiply: 10000x
-matrix_RtAR: 10000x
-
+```
+matrix_randomize: 2~3x
+```
 > 如果记录了多种优化方法，可以做表格比较
 
 # 优化方法
@@ -27,7 +39,9 @@ matrix_RtAR: 10000x
 
 > matrix_randomize
 
-请回答。
+```
+ndarray是以YX序，将原XY序循环改为YX序循环，空间连续性对缓存友好。
+```
 
 > matrix_transpose
 

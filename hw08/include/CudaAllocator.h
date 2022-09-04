@@ -28,4 +28,9 @@ struct CudaAllocator {
     constexpr bool operator==(CudaAllocator<T> const &other) const {
         return this == &other;
     }
+
+     void select_on_container_copy_construction() const {}
+
+    void* resource() const {}
+
 };
